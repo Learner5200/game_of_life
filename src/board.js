@@ -16,6 +16,12 @@ export default class Board {
     return this.grid[row][column];
   }
 
+  setup(...coordinates) {
+    coordinates.forEach((coordinate) => {
+      this.find(coordinate).live();
+    });
+  }
+
   _createGrid() {
     const grid = [];
     for (let i = 0; i < this.height; i += 1) {

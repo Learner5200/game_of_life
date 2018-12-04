@@ -1,7 +1,9 @@
 import Board from '../src/board';
 
 describe('Board', () => {
-  const CellMock = jest.fn();
+  class CellMock {
+    live() {}
+  }
   const board = new Board({
     width: 20,
     height: 10,
@@ -26,6 +28,18 @@ describe('Board', () => {
   describe('#find', () => {
     it('find element from co-ordinates', () => {
       expect(board.find([4, 5])).toBe(board.grid[4][5]);
+    });
+  });
+  describe('#setup', () => {
+    it('brings life to cells at given co-ordinates', () => {
+      const spy = jest.spyOn(board.find([0, 0]), 'live');
+      board.setup([0, 0]);
+      expect(spy).toHaveBeenCalled();
+    });
+    it('does not bring life to other cells', () => {
+      const spy = jest.spyOn(board.find([0, 1]), 'live');
+      board.setup([0, 0]);
+      expect(spy).not.toHaveBeenCalled();
     });
   });
 });
