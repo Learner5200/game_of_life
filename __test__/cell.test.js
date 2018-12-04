@@ -6,6 +6,7 @@ describe('Cell', () => {
       [],
       [],
     ],
+    cells: () => boardMock.grid.flat(),
   };
   for (let i = 0; i < 3; i += 1) {
     boardMock.grid[0].push(new Cell({
@@ -44,6 +45,28 @@ describe('Cell', () => {
       r1c2.live();
       r1c2.die();
       expect(r1c2.isAlive).toBe(false);
+    });
+  });
+
+  describe('#livingNeighbours()', () => {
+    it('returns array of living neighbours', () => {
+      const living = [
+        boardMock.grid[0][0],
+        boardMock.grid[0][1],
+        boardMock.grid[1][0],
+      ];
+      const dead = [
+        boardMock.grid[0][2],
+        boardMock.grid[1][1],
+        boardMock.grid[1][2],
+      ];
+      living.forEach(cell => cell.live());
+      living.forEach((cell) => {
+        expect(boardMock.grid[1][1].livingNeighbours()).toContain(cell);
+      });
+      dead.forEach((cell) => {
+        expect(boardMock.grid[1][1].livingNeighbours()).not.toContain(cell);
+      });
     });
   });
 });

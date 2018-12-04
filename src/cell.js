@@ -15,4 +15,14 @@ export default class Cell {
   die() {
     this.isAlive = false;
   }
+
+  livingNeighbours() {
+    return this._neighbours().filter(cell => cell.isAlive);
+  }
+
+  _neighbours() {
+    return this.board.cells().filter((cell) => {
+      return (Math.abs(this.row - cell.row) === 1 || Math.abs(this.column - cell.column) === 1);
+    });
+  }
 }

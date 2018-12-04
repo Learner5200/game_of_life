@@ -22,7 +22,7 @@ describe('Board', () => {
   });
   describe('#cells', () => {
     it('returns all elements in grid', () => {
-      expect(board.cells()).toBe(board.grid.flatten);
+      expect(board.cells()).toEqual(board.grid.flat());
     });
   });
   describe('#find', () => {

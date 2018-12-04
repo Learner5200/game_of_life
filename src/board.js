@@ -9,7 +9,7 @@ export default class Board {
   }
 
   cells() {
-    return this.grid.flatten;
+    return this.grid.flat();
   }
 
   find([row, column]) {
