@@ -12,6 +12,10 @@ export default class Board {
     return this.grid.flatten;
   }
 
+  find([row, column]) {
+    return this.grid[row][column];
+  }
+
   _createGrid() {
     const grid = [];
     for (let i = 0; i < this.height; i += 1) {

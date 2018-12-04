@@ -23,4 +23,9 @@ describe('Board', () => {
       expect(board.cells()).toBe(board.grid.flatten);
     });
   });
+  describe('#find', () => {
+    it('find element from co-ordinates', () => {
+      expect(board.find([4, 5])).toBe(board.grid[4][5]);
+    });
+  });
 });
