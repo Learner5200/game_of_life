@@ -24,14 +24,16 @@ export default class Board {
 
   _createGrid() {
     const grid = [];
-    for (let i = 0; i < this.height; i += 1) {
+    for (let rowNum = 0; rowNum < this.height; rowNum += 1) {
       grid.push([]);
-    }
-    grid.forEach((row) => {
-      for (let i = 0; i < this.width; i += 1) {
-        row.push(new this.CellClass());
+      for (let colNum = 0; colNum < this.width; colNum += 1) {
+        grid[rowNum].push(new this.CellClass({
+          board: this,
+          row: rowNum,
+          column: colNum,
+        }));
       }
-    });
+    }
     return grid;
   }
 }
