@@ -7,4 +7,12 @@ export default class Cell {
     this.column = column;
     this.isAlive = false;
   }
+
+  live() {
+    this.isAlive = true;
+  }
+
+  die() {
+    this.isAlive = false;
+  }
 }

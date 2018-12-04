@@ -19,8 +19,9 @@ describe('Cell', () => {
       column: i,
     }));
   }
+  const r1c2 = boardMock.grid[1][2];
+
   describe('constructor', () => {
-    const r1c2 = boardMock.grid[1][2];
     it('sets row', () => {
       expect(r1c2.row).toBe(1);
     });
@@ -28,6 +29,20 @@ describe('Cell', () => {
       expect(r1c2.column).toBe(2);
     });
     it('sets isAlive to false', () => {
+      expect(r1c2.isAlive).toBe(false);
+    });
+  });
+
+  describe('#live', () => {
+    it('sets isAlive to true', () => {
+      r1c2.live();
+      expect(r1c2.isAlive).toBe(true);
+    });
+  });
+  describe('#die', () => {
+    it('sets isAlive to false', () => {
+      r1c2.live();
+      r1c2.die();
       expect(r1c2.isAlive).toBe(false);
     });
   });
