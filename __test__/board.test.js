@@ -18,4 +18,9 @@ describe('Board', () => {
       expect(board.grid[0][0]).toBeInstanceOf(CellMock);
     });
   });
+  describe('#cells', () => {
+    it('returns all elements in grid', () => {
+      expect(board.cells()).toBe(board.grid.flatten);
+    });
+  });
 });

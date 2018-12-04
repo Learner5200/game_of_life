@@ -8,6 +8,10 @@ export default class Board {
     this.grid = this._createGrid();
   }
 
+  cells() {
+    return this.grid.flatten;
+  }
+
   _createGrid() {
     const grid = [];
     for (let i = 0; i < this.height; i += 1) {
