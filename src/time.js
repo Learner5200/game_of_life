@@ -1,5 +1,4 @@
 export default class Time {
-
   static tick(board) {
     this._decideFates(board);
     this._enactFates(board);
