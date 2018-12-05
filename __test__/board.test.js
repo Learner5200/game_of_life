@@ -2,7 +2,9 @@ import Board from '../src/board';
 
 describe('Board', () => {
   class CellMock {
-    live() {}
+    live() {
+      return this;
+    }
   }
   const board = new Board({
     width: 20,
