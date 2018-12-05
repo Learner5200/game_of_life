@@ -6,6 +6,7 @@ export default class Cell {
     this.row = row;
     this.column = column;
     this.isAlive = false;
+    this.nextState = 'unknown';
   }
 
   live() {
@@ -21,7 +22,7 @@ export default class Cell {
   }
 
   _neighbours() {
-    return this.board.cells().filter(cell => this.isAdjacentTo(cell));
+    return this.board.cells().filter(cell => this._isAdjacentTo(cell));
   }
 
   _isAdjacentTo(cell) {

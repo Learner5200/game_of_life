@@ -69,4 +69,10 @@ describe('Cell', () => {
       });
     });
   });
+
+  describe('.nextState', () => {
+    it('begins unknown', () => {
+      expect(r1c2.nextState).toBe('unknown');
+    });
+  });
 });
