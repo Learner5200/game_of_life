@@ -17,6 +17,14 @@ export default class Cell {
     this.isAlive = false;
   }
 
+  prepareToDie() {
+    this.nextState = 'dead';
+  }
+
+  prepareToLive() {
+    this.nextState = 'alive';
+  }
+
   livingNeighbours() {
     return this._neighbours().filter(cell => cell.isAlive);
   }
