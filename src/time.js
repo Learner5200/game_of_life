@@ -8,6 +8,6 @@ export default class Time {
   static _decideFate(cell) {
     const neighbours = cell.livingNeighbours().length;
     if (neighbours > 3 || neighbours < 2) cell.die();
-    // if (neighbours === 3) cell.live();
+    if (neighbours === 3) cell.live();
   }
 }
