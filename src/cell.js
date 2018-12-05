@@ -6,7 +6,7 @@ export default class Cell {
     this.row = row;
     this.column = column;
     this.isAlive = false;
-    this.nextState = 'unknown';
+    this.nextMove = 'none';
   }
 
   live() {
@@ -18,11 +18,11 @@ export default class Cell {
   }
 
   prepareToDie() {
-    this.nextState = 'dead';
+    this.nextMove = this.die;
   }
 
   prepareToLive() {
-    this.nextState = 'alive';
+    this.nextMove = this.live;
   }
 
   livingNeighbours() {

@@ -70,23 +70,23 @@ describe('Cell', () => {
     });
   });
 
-  describe('#nextState', () => {
+  describe('nextMove', () => {
     it('begins unknown', () => {
-      expect(r1c2.nextState).toBe('unknown');
+      expect(r1c2.nextMove).toBe('none');
     });
   });
 
   describe('#prepareToDie', () => {
-    it('sets next state to dead', () => {
+    it('sets next move to die', () => {
       r1c2.prepareToDie();
-      expect(r1c2.nextState).toBe('dead');
+      expect(r1c2.nextMove).toBe(r1c2.die);
     });
   });
 
   describe('#prepareToLive', () => {
-    it('sets next state to alive', () => {
+    it('sets next move to live', () => {
       r1c2.prepareToLive();
-      expect(r1c2.nextState).toBe('alive');
+      expect(r1c2.nextMove).toBe(r1c2.live);
     });
   });
 });
