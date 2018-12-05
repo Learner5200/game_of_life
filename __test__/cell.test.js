@@ -71,8 +71,8 @@ describe('Cell', () => {
   });
 
   describe('nextMove', () => {
-    it('begins unknown', () => {
-      expect(r1c2.nextMove).toBe('none');
+    it('begins as doNothing', () => {
+      expect(r1c2.nextMove).toBe(r1c2.doNothing);
     });
   });
 
