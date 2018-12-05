@@ -72,3 +72,26 @@ describe('cells spawn when supposed to', () => {
     expect(cell.isAlive).toBe(false);
   });
 });
+
+describe('patterns', () => {
+  test('three cells in a row display blinker pattern', () => {
+    board.setup([0, 1], [1, 1], [2, 1]);
+    expect(board.find([0, 1]).isAlive).toBe(true);
+    expect(board.find([1, 1]).isAlive).toBe(true);
+    expect(board.find([2, 1]).isAlive).toBe(true);
+    expect(board.find([1, 0]).isAlive).toBe(false);
+    expect(board.find([1, 2]).isAlive).toBe(false);
+    Time.tick(board);
+    expect(board.find([1, 0]).isAlive).toBe(true);
+    expect(board.find([1, 1]).isAlive).toBe(true);
+    expect(board.find([1, 2]).isAlive).toBe(true);
+    expect(board.find([0, 1]).isAlive).toBe(false);
+    expect(board.find([2, 1]).isAlive).toBe(false);
+    Time.tick(board);
+    expect(board.find([0, 1]).isAlive).toBe(true);
+    expect(board.find([1, 1]).isAlive).toBe(true);
+    expect(board.find([2, 1]).isAlive).toBe(true);
+    expect(board.find([1, 0]).isAlive).toBe(false);
+    expect(board.find([1, 2]).isAlive).toBe(false);
+  });
+});
