@@ -21,8 +21,10 @@ export default class Cell {
   }
 
   _neighbours() {
-    return this.board.cells().filter((cell) => {
-      return (Math.abs(this.row - cell.row) === 1 || Math.abs(this.column - cell.column) === 1);
-    });
+    return this.board.cells().filter(cell => this.isAdjacentTo(cell));
+  }
+
+  _isAdjacentTo(cell) {
+    return (Math.abs(this.row - cell.row) === 1 || Math.abs(this.column - cell.column) === 1);
   }
 }
