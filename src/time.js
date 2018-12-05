@@ -23,6 +23,6 @@ export default class Time {
   }
 
   static _enactFate(cell) {
-    cell.nextMove.call();
+    cell.nextMove();
   }
 }
