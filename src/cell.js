@@ -38,6 +38,7 @@ export default class Cell {
   }
 
   _isAdjacentTo(cell) {
-    return (Math.abs(this.row - cell.row) === 1 || Math.abs(this.column - cell.column) === 1);
+    if (this === cell) return false;
+    return (Math.abs(this.row - cell.row) <= 1 && Math.abs(this.column - cell.column) <= 1);
   }
 }
