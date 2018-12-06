@@ -1,26 +1,30 @@
 import Cell from '../src/cell';
 
 describe('Cell', () => {
-  const boardMock = {
-    grid: [
-      [],
-      [],
-    ],
-    cells: () => boardMock.grid.flat(),
-  };
-  for (let i = 0; i < 3; i += 1) {
-    boardMock.grid[0].push(new Cell({
-      board: boardMock,
-      row: 0,
-      column: i,
-    }));
-    boardMock.grid[1].push(new Cell({
-      board: boardMock,
-      row: 1,
-      column: i,
-    }));
-  }
-  const r1c2 = boardMock.grid[1][2];
+  let boardMock;
+  let r1c2;
+  beforeEach(() => {
+    boardMock = {
+      grid: [
+        [],
+        [],
+      ],
+      cells: () => boardMock.grid.flat(),
+    };
+    for (let i = 0; i < 3; i += 1) {
+      boardMock.grid[0].push(new Cell({
+        board: boardMock,
+        row: 0,
+        column: i,
+      }));
+      boardMock.grid[1].push(new Cell({
+        board: boardMock,
+        row: 1,
+        column: i,
+      }));
+    }
+    r1c2 = boardMock.grid[1][2];
+  });
 
   describe('constructor', () => {
     it('sets row', () => {
