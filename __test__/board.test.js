@@ -6,11 +6,16 @@ describe('Board', () => {
       return this;
     }
   }
-  const board = new Board({
-    width: 20,
-    height: 10,
-    CellClass: CellMock,
+  let board;
+
+  beforeEach(() => {
+    board = new Board({
+      width: 20,
+      height: 10,
+      CellClass: CellMock,
+    });
   });
+
   describe('.grid', () => {
     it('has the height specified', () => {
       expect(board.grid.length).toBe(10);
