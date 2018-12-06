@@ -25,6 +25,7 @@ export default class Board {
     coordinates.forEach((coordinate) => {
       this.find(coordinate).live();
     });
+    this.boardView.render();
   }
 
   _createGrid() {
