@@ -18,8 +18,13 @@ export default class Time {
 
   static _decideFate(cell) {
     const neighbours = cell.livingNeighbours().length;
-    if (neighbours > 3 || neighbours < 2) cell.prepareToDie();
-    if (neighbours === 3) cell.prepareToLive();
+    if (neighbours > 3 || neighbours < 2) {
+      cell.prepareToDie();
+    } else if (neighbours === 3) {
+      cell.prepareToLive();
+    } else {
+      cell.prepareToDoNothing();
+    }
   }
 
   static _enactFate(cell) {

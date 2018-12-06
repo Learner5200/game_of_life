@@ -12,6 +12,7 @@ describe('Time', () => {
         die: () => 'dead',
         prepareToLive: () => 'alive',
         prepareToDie: () => 'dead',
+        prepareToDoNothing: () => 'nothing',
         nextMove: () => 'move',
       };
       boardMock = {
@@ -25,20 +26,6 @@ describe('Time', () => {
         const spy = jest.spyOn(cell, 'prepareToLive');
         Time.tick(boardMock);
         expect(spy).toHaveBeenCalled();
-        spy.mockRestore();
-      });
-      it('does not tell cells with less than 3 living neighbours to live', () => {
-        cell.livingNeighbours = () => ['Neighbour1', 'Neighbour2'];
-        const spy = jest.spyOn(cell, 'prepareToLive');
-        Time.tick(boardMock);
-        expect(spy).not.toHaveBeenCalled();
-        spy.mockRestore();
-      });
-      it('does not tell cells with more than 3 living neighbours to live', () => {
-        cell.livingNeighbours = () => ['Neighbour1', 'Neighbour2', 'Neighbour3', 'Neighbour4'];
-        const spy = jest.spyOn(cell, 'prepareToLive');
-        Time.tick(boardMock);
-        expect(spy).not.toHaveBeenCalled();
         spy.mockRestore();
       });
     });
@@ -58,18 +45,14 @@ describe('Time', () => {
         expect(spy).toHaveBeenCalled();
         spy.mockRestore();
       });
-      it('does not tell cells with 2 living neighbours to die', () => {
+    });
+
+    describe('the tick telleth to do nothing', () => {
+      it('instructs cells not told to live or die to do nothing', () => {
         cell.livingNeighbours = () => ['Neighbour1', 'Neighbour2'];
-        const spy = jest.spyOn(cell, 'prepareToDie');
+        const spy = jest.spyOn(cell, 'prepareToDoNothing');
         Time.tick(boardMock);
-        expect(spy).not.toHaveBeenCalled();
-        spy.mockRestore();
-      });
-      it('does not tell cells with 3 living neighbours to die', () => {
-        cell.livingNeighbours = () => ['Neighbour1', 'Neighbour2', 'Neighbour3'];
-        const spy = jest.spyOn(cell, 'prepareToDie');
-        Time.tick(boardMock);
-        expect(spy).not.toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
         spy.mockRestore();
       });
     });
