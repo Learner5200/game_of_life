@@ -1,97 +1,79 @@
 import Board from '../../src/board';
 import Time from '../../src/time';
-import Cell from '../../src/cell';
 
 let board;
+let spy;
 
 beforeEach(() => {
   board = new Board({
-    width: 10,
-    height: 10,
-    CellClass: Cell,
+    width: 3,
+    height: 3,
   });
+  spy = jest.spyOn(console, 'log');
+});
+
+afterEach(() => {
+  spy.mockRestore();
 });
 
 describe('cells die when supposed to', () => {
   test('single cell will die off after one tick', () => {
     board.setup([0, 0]);
-    const cell = board.find([0, 0]);
-    expect(cell.isAlive).toBe(true);
+    expect(spy).toHaveBeenCalledWith('X O O \nO O O \nO O O \n');
     Time.tick(board);
-    expect(cell.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O O O \nO O O \nO O O \n');
   });
 
-  test('cell with only one neighbour will die off after one tick', () => {
+  test('cells with only one neighbour will die off after one tick', () => {
     board.setup([0, 0], [0, 1]);
-    const cell = board.find([0, 0]);
-    const cell2 = board.find([0, 1]);
-    expect(cell.isAlive).toBe(true);
-    expect(cell2.isAlive).toBe(true);
+    expect(spy).toHaveBeenCalledWith('X X O \nO O O \nO O O \n');
     Time.tick(board);
-    expect(cell.isAlive).toBe(false);
-    expect(cell2.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O O O \nO O O \nO O O \n');
   });
 
   test('cell with four neighbours will die off after one tick', () => {
     board.setup([1, 1], [0, 1], [1, 0], [1, 2], [2, 1]);
-    const cell = board.find([1, 1]);
-    expect(cell.isAlive).toBe(true);
+    expect(spy).toHaveBeenCalledWith('O X O \nX X X \nO X O \n');
     Time.tick(board);
-    expect(cell.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('X X X \nX O X \nX X X \n');
   });
 
   test('cell with three neighbours will not die off after one tick', () => {
     board.setup([1, 1], [0, 1], [1, 0], [1, 2]);
-    const cell = board.find([1, 1]);
-    expect(cell.isAlive).toBe(true);
+    expect(spy).toHaveBeenCalledWith('O X O \nX X X \nO O O \n');
     Time.tick(board);
-    expect(cell.isAlive).toBe(true);
+    expect(spy).toHaveBeenCalledWith('X X X \nX X X \nO X O \n');
   });
 });
 
 describe('cells spawn when supposed to', () => {
   test('dead cell with three neighbours will spawn after one tick', () => {
     board.setup([0, 1], [1, 0], [1, 2]);
-    const cell = board.find([1, 1]);
-    expect(cell.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O X O \nX O X \nO O O \n');
     Time.tick(board);
-    expect(cell.isAlive).toBe(true);
+    expect(spy).toHaveBeenCalledWith('O X O \nO X O \nO O O \n');
   });
   test('dead cell with two neighbours will not spawn after one tick', () => {
     board.setup([0, 1], [1, 0]);
-    const cell = board.find([1, 1]);
-    expect(cell.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O X O \nX O O \nO O O \n');
     Time.tick(board);
-    expect(cell.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O O O \nO O O \nO O O \n');
   });
   test('dead cell with four neighbours will not spawn after one tick', () => {
     board.setup([0, 1], [1, 0], [1, 2], [2, 1]);
-    const cell = board.find([1, 1]);
-    expect(cell.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O X O \nX O X \nO X O \n');
     Time.tick(board);
-    expect(cell.isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O X O \nX O X \nO X O \n');
   });
 });
 
 describe('patterns', () => {
   test('three cells in a row display blinker pattern', () => {
     board.setup([0, 1], [1, 1], [2, 1]);
-    expect(board.find([0, 1]).isAlive).toBe(true);
-    expect(board.find([1, 1]).isAlive).toBe(true);
-    expect(board.find([2, 1]).isAlive).toBe(true);
-    expect(board.find([1, 0]).isAlive).toBe(false);
-    expect(board.find([1, 2]).isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O X O \nO X O \nO X O \n');
     Time.tick(board);
-    expect(board.find([1, 0]).isAlive).toBe(true);
-    expect(board.find([1, 1]).isAlive).toBe(true);
-    expect(board.find([1, 2]).isAlive).toBe(true);
-    expect(board.find([0, 1]).isAlive).toBe(false);
-    expect(board.find([2, 1]).isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O O O \nX X X \nO O O \n');
     Time.tick(board);
-    expect(board.find([0, 1]).isAlive).toBe(true);
-    expect(board.find([1, 1]).isAlive).toBe(true);
-    expect(board.find([2, 1]).isAlive).toBe(true);
-    expect(board.find([1, 0]).isAlive).toBe(false);
-    expect(board.find([1, 2]).isAlive).toBe(false);
+    expect(spy).toHaveBeenCalledWith('O X O \nO X O \nO X O \n');
   });
 });
