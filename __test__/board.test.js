@@ -6,6 +6,11 @@ describe('Board', () => {
       return this;
     }
   }
+  class BoardViewMock {
+    render() {
+      return this;
+    }
+  }
   let board;
 
   beforeEach(() => {
@@ -13,6 +18,7 @@ describe('Board', () => {
       width: 20,
       height: 10,
       CellClass: CellMock,
+      BoardViewClass: BoardViewMock,
     });
   });
 
@@ -47,6 +53,11 @@ describe('Board', () => {
       const spy = jest.spyOn(board.find([0, 1]), 'live');
       board.setup([0, 0]);
       expect(spy).not.toHaveBeenCalled();
+    });
+    it('renders board', () => {
+      const spy = jest.spyOn(board.boardView, 'render');
+      board.setup([0, 0]);
+      expect(spy).toHaveBeenCalled();
     });
   });
 });
