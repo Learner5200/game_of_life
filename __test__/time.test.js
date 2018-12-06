@@ -17,6 +17,9 @@ describe('Time', () => {
       };
       boardMock = {
         cells: () => [cell],
+        boardView: {
+          render: () => 'render',
+        },
       };
     });
 
@@ -60,6 +63,14 @@ describe('Time', () => {
     describe('the ticks will be done', () => {
       it('calls next move of cells', () => {
         const spy = jest.spyOn(cell, 'nextMove');
+        Time.tick(boardMock);
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+
+    describe('the tick makes itself visible', () => {
+      it('renders board view', () => {
+        const spy = jest.spyOn(boardMock.boardView, 'render');
         Time.tick(boardMock);
         expect(spy).toHaveBeenCalled();
       });
