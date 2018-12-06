@@ -47,6 +47,13 @@ describe('Cell', () => {
       expect(r1c2.isAlive).toBe(false);
     });
   });
+  describe('#doNothing', () => {
+    it('does not change isAlive', () => {
+      r1c2.live();
+      r1c2.doNothing();
+      expect(r1c2.isAlive).toBe(true);
+    });
+  });
 
   describe('#livingNeighbours()', () => {
     it('returns array of living neighbours', () => {
@@ -87,6 +94,13 @@ describe('Cell', () => {
     it('sets next move to live', () => {
       r1c2.prepareToLive();
       expect(r1c2.nextMove).toBe(r1c2.live);
+    });
+  });
+
+  describe('#prepareToDoNothing', () => {
+    it('sets next move to doNothing', () => {
+      r1c2.prepareToDoNothing();
+      expect(r1c2.nextMove).toBe(r1c2.doNothing);
     });
   });
 });

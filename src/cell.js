@@ -29,6 +29,10 @@ export default class Cell {
     this.nextMove = this.live;
   }
 
+  prepareToDoNothing() {
+    this.nextMove = this.doNothing;
+  }
+
   livingNeighbours() {
     return this._neighbours().filter(cell => cell.isAlive);
   }
