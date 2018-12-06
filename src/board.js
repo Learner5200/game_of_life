@@ -1,11 +1,16 @@
+import Cell from './cell';
+import BoardView from './board_view';
+
 export default class Board {
   constructor({
-    width, height, CellClass,
+    width, height, CellClass = Cell, BoardViewClass = BoardView,
   }) {
     this.width = width;
     this.height = height;
     this.CellClass = CellClass;
+    this.BoardViewClass = BoardViewClass;
     this.grid = this._createGrid();
+    this.boardView = new BoardViewClass(this);
   }
 
   cells() {
